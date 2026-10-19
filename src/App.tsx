@@ -296,7 +296,7 @@ export function App() {
 
           {/* Date Column Headers (Aligned with HabitRow check buttons) */}
           {filteredHabits.length > 0 && (
-            <div className="flex items-center justify-between px-3.5 py-1 text-[11px] font-semibold text-muted">
+            <div className="flex items-center justify-between px-[15px] py-1 text-[11px] font-semibold text-muted">
               <span>{canReorder && isReorderMode ? 'Drag handles to reorder' : 'Habit & Strength'}</span>
               <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
                 {displayedDays.map((d) => {
@@ -305,7 +305,7 @@ export function App() {
                   return (
                     <div
                       key={d}
-                      className={`grid w-9 text-center ${isT ? 'text-accent font-bold' : ''}`}
+                      className={`grid w-10 shrink-0 text-center ${isT ? 'text-accent font-bold' : ''}`}
                     >
                       <span className="text-[10px] uppercase opacity-70">
                         {WEEKDAY_LETTER[parts.weekday]}

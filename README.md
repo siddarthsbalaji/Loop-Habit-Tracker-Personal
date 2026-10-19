@@ -1,10 +1,10 @@
 # Loop Habit Tracker — iOS Standalone PWA
 
-A complete, production-ready, offline-first Progressive Web App (PWA) replicating the core UI, interactions, and exponential habit-strength mechanics of **Loop Habit Tracker** ([iSoron/uhabits](https://github.com/iSoron/uhabits)) specifically tuned for iOS Safari standalone mode (*Add to Home Screen*).
+wanted to use **Loop Habit Tracker** ([iSoron/uhabits](https://github.com/iSoron/uhabits)) on IOS devices, so I made this
 
 ---
 
-## 🚀 Features
+## Features
 
 ### 1. Authentic Loop Habit Strength Scoring Engine
 - **Exponential Moving Average (EMA):**
@@ -85,7 +85,7 @@ A complete, production-ready, offline-first Progressive Web App (PWA) replicatin
 
 ---
 
-## 📦 Directory Structure
+## Directory Structure
 
 ```text
 ├── index.html                   # iOS notch-optimized shell with pre-paint theme script
@@ -137,7 +137,7 @@ A complete, production-ready, offline-first Progressive Web App (PWA) replicatin
 
 ---
 
-## 🏃 Getting Started
+## Getting Started
 
 ### 1. Install Dependencies
 ```bash
@@ -168,7 +168,7 @@ Open `http://localhost:4173/` in Safari on iOS or your desktop browser.
 
 ---
 
-## 📲 Installing on iOS Safari
+## Installing on iOS Safari
 1. Open the app URL in **Safari**.
 2. Tap the **Share** button in the Safari navigation toolbar.
 3. Scroll down and tap **Add to Home Screen**.
