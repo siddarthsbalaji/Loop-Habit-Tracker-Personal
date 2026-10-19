@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Notch-aware, non-zoomable viewport for iOS standalone mode -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <title>Loop Habit Tracker — Offline Habit Tracking</title>
+    <meta
+      name="description"
+      content="Build lasting habits with Loop’s habit-strength score. Fully offline, private, and installable on iPhone."
+    />
+
+    <!-- iOS WebKit standalone (Add to Home Screen) -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Loop Habits" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Apply theme before first paint to avoid a white flash -->
+    <script>
+      (function () {
+        try {
+          var pref = localStorage.getItem('loop.theme') || 'system';
+          var dark = pref === 'dark' || (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.classList.toggle('light', !dark);
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Loop Habits needs JavaScript enabled.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

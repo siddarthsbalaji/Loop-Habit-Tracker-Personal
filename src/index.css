@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ tokens */
+@layer base {
+  :root,
+  html.light {
+    --c-bg: 242 243 247;
+    --c-surface: 255 255 255;
+    --c-elevated: 234 236 242;
+    --c-line: 18 22 33;
+    --c-ink: 17 19 26;
+    --c-muted: 98 104 122;
+    --c-faint: 160 165 180;
+    --c-accent: 13 148 136;
+    --c-danger: 220 38 38;
+    --line-alpha: 0.08;
+    --glass: rgba(242, 243, 247, 0.78);
+    color-scheme: light;
+  }
+
+  html.dark {
+    --c-bg: 11 13 18;
+    --c-surface: 21 24 32;
+    --c-elevated: 32 36 47;
+    --c-line: 255 255 255;
+    --c-ink: 236 238 244;
+    --c-muted: 142 148 166;
+    --c-faint: 92 98 116;
+    --c-accent: 45 212 191;
+    --c-danger: 248 113 113;
+    --line-alpha: 0.07;
+    --glass: rgba(11, 13, 18, 0.72);
+    color-scheme: dark;
+  }
+
+  /* ---------------------------------------------------- iOS standalone */
+  html,
+  body {
+    height: 100%;
+    /* Kill pull-to-refresh / rubber-band bounce on the document. */
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+  }
+
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    /* App-like: no text selection, no callouts, no tap flash. */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    touch-action: manipulation;
+    font-feature-settings: 'cv11', 'ss01', 'tnum';
+  }
+
+  #root {
+    height: 100%;
+  }
+
+  /* Editable fields must stay selectable and ≥16px to prevent iOS zoom. */
+  input,
+  textarea,
+  [contenteditable='true'] {
+    user-select: text;
+    -webkit-user-select: text;
+    font-size: 16px;
+  }
+
+  button {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-accent));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}
+
+/* -------------------------------------------------------------- components */
+@layer components {
+  /* Internal scroll container: momentum scroll, but bounce stays contained. */
+  .scroll-area {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  .hairline {
+    border-color: rgb(var(--c-line) / var(--line-alpha));
+  }
+
+  .glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  .card {
+    @apply rounded-2xl border bg-surface shadow-card hairline;
+  }
+
+  .icon-btn {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full text-ink/80 transition
+      active:scale-90 active:bg-ink/10;
+  }
+
+  .btn {
+    @apply inline-flex h-12 items-center justify-center gap-2 rounded-xl px-4 text-[15px] font-semibold
+      transition active:scale-[0.97] disabled:opacity-40;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-black shadow-glow;
+  }
+
+  .btn-secondary {
+    @apply btn bg-elevated text-ink;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger/15 text-danger;
+  }
+
+  .field {
+    @apply w-full rounded-xl border bg-elevated px-4 py-3 text-ink placeholder:text-faint hairline
+      transition focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25;
+  }
+
+  .label {
+    @apply mb-2 block text-[12px] font-semibold uppercase tracking-[0.08em] text-muted;
+  }
+
+  .segmented {
+    @apply relative grid rounded-xl bg-elevated p-1;
+  }
+
+  .segmented > button {
+    @apply relative z-10 h-8 rounded-lg text-[13px] font-semibold text-muted transition-colors;
+  }
+
+  .segmented > button[aria-pressed='true'] {
+    @apply bg-surface text-ink shadow-sm;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .skip-hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgb(var(--c-muted) / 0.45) 0 2px,
+      transparent 2px 5px
+    );
+  }
+
+  .draw-path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+}
